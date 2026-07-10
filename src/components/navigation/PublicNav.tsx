@@ -41,7 +41,7 @@ export default function PublicNav() {
 
     if (sections.length === 0) return undefined
 
-    if ('IntersectionObserver' in window) {
+    if (typeof IntersectionObserver !== 'undefined') {
       const visibleSections = new Set<string>()
       const observer = new IntersectionObserver(
         (entries) => {
