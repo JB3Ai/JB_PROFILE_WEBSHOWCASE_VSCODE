@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 
 export const BOOT_SESSION_KEY = 'jonathan-blackburn-os-boot-seen'
@@ -19,20 +19,36 @@ type BootSequenceProps = {
 export default function BootSequence({ onComplete }: BootSequenceProps) {
   const prefersReducedMotion = useReducedMotion()
   const durationMs = prefersReducedMotion ? 2600 : 3000
+  const fadeOutMs = prefersReducedMotion ? 200 : 800
+  const [isFadingOut, setIsFadingOut] = useState(false)
+  const completionRequestedRef = useRef(false)
+
+  const startFadeOut = useCallback(() => {
+    if (completionRequestedRef.current) return
+    completionRequestedRef.current = true
+    setIsFadingOut(true)
+
+    window.setTimeout(() => {
+      onComplete()
+    }, fadeOutMs)
+  }, [fadeOutMs, onComplete])
 
   useEffect(() => {
-    const timer = window.setTimeout(onComplete, durationMs)
+    const timer = window.setTimeout(startFadeOut, durationMs)
 
     return () => window.clearTimeout(timer)
-  }, [durationMs, onComplete])
+  }, [durationMs, startFadeOut])
 
   return (
     <motion.div
       className="boot-shell"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: prefersReducedMotion ? 0.2 : 0.45, ease: 'easeOut' } }}
-      transition={{ duration: prefersReducedMotion ? 0.2 : 0.55, ease: 'easeOut' }}
+      animate={{ opacity: isFadingOut ? 0 : 1 }}
+      exit={{ opacity: 0, transition: { duration: fadeOutMs / 1000, ease: 'easeOut' } }}
+      transition={{
+        duration: isFadingOut ? fadeOutMs / 1000 : prefersReducedMotion ? 0.2 : 0.55,
+        ease: 'easeOut'
+      }}
     >
       <div className="boot-orb left-[12%] top-[10%] h-44 w-44 bg-cyan-300/18" />
       <div className="boot-orb right-[10%] top-[18%] h-36 w-36 bg-emerald-300/14" />
@@ -53,7 +69,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
               <h1 className="mt-5 text-display boot-title">INITIALISING JONATHAN BLACKBURN OS</h1>
             </div>
 
-            <button type="button" onClick={onComplete} className="boot-skip">
+            <button type="button" onClick={startFadeOut} className="boot-skip">
               Skip
             </button>
           </div>
