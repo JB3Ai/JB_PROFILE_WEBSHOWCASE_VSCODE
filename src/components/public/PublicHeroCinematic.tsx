@@ -31,7 +31,7 @@ export default function PublicHeroCinematic({
             <p className="public-pretitle">{founderProfile.positioningLine}</p>
             <h1 className="public-hero-title">
               <span className="public-hero-title-line">Jonathan Blackburn</span>
-              <span className="public-hero-title-os">OS</span>
+              <span className="public-hero-title-os accent-green">OS</span>
             </h1>
             <p className="public-hero-quote">{founderProfile.coreQuote}</p>
             <p className="public-hero-body">

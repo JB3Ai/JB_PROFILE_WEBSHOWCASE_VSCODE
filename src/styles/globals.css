@@ -378,6 +378,31 @@ textarea {
     z-index: 1;
   }
 
+  .glass-panel-premium {
+    @apply relative overflow-hidden transition-all duration-300;
+    border-radius: 16px;
+    background: rgba(26, 34, 47, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-panel-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .glass-panel-premium:hover {
+    transform: translateY(-4px);
+    border-color: rgba(102, 255, 102, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 24px rgba(102, 255, 102, 0.15);
+  }
+
   .glass-panel-sm {
     @apply glass-panel p-4;
   }
@@ -904,10 +929,17 @@ textarea {
   }
 
   .public-hero-title {
-    font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
-    @apply mt-5 max-w-[10.8ch] text-[3.95rem] font-semibold tracking-[-0.042em] text-white md:mt-6 md:text-[5.15rem] xl:text-[6rem];
-    line-height: 0.92;
+    font-family: 'Fraunces', Georgia, serif;
+    @apply mt-5 max-w-[12ch] text-[4rem] font-semibold tracking-[-0.04em] text-white md:mt-6 md:text-[5.5rem] xl:text-[6.5rem];
+    line-height: 0.95;
     text-rendering: optimizeLegibility;
+  }
+
+  .public-hero-title .accent-green {
+    color: transparent;
+    background: linear-gradient(90deg, #f5f7fa 0%, #66ff66 50%, #80e8ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 
   .public-hero-title-line,
@@ -942,8 +974,8 @@ textarea {
   }
 
   .public-hero-body {
-    @apply mt-6 max-w-[34rem] text-base leading-8 md:mt-7 md:text-lg;
-    color: rgba(215, 222, 229, 0.86);
+    @apply mt-6 max-w-[36rem] text-base leading-relaxed md:mt-8 md:text-xl;
+    color: rgba(215, 222, 229, 0.85);
   }
 
   .public-hero-actions {
@@ -1271,23 +1303,23 @@ textarea {
   }
 
   .app-portfolio-card {
-    @apply relative grid gap-6 overflow-hidden rounded-[1rem] border p-5 md:p-6;
+    @apply relative grid gap-6 overflow-hidden p-6 md:p-8;
     isolation: isolate;
-    border-color: rgba(173, 198, 220, 0.12);
-    background:
-      linear-gradient(135deg, rgba(233, 201, 143, 0.055), transparent 24%),
-      linear-gradient(180deg, rgba(13, 22, 32, 0.9), rgba(8, 14, 22, 0.94));
-    box-shadow: 0 18px 42px rgba(1, 7, 16, 0.18);
   }
 
   .app-portfolio-card::before {
     content: '';
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     background: linear-gradient(90deg, rgba(88, 214, 218, 0.05), transparent 38%);
     pointer-events: none;
+  }
+
+  .app-portfolio-card > * {
+    position: relative;
+    z-index: 1;
   }
 
   .app-portfolio-card-with-image {
@@ -2200,7 +2232,23 @@ textarea {
   }
 
   .os-window-controls {
-    @apply flex items-center gap-2;
+    @apply mr-3 flex items-center gap-2;
+  }
+
+  .os-window-dot {
+    @apply h-3 w-3 rounded-full shadow-inner opacity-80 transition-opacity duration-200 hover:opacity-100;
+  }
+
+  .os-window-dot.close {
+    background: #fb7185;
+  }
+
+  .os-window-dot.minimize {
+    background: #facc15;
+  }
+
+  .os-window-dot.maximize {
+    background: #4ade80;
   }
 
   .os-window-title-group {
@@ -2257,13 +2305,13 @@ textarea {
   }
 
   .os-dock {
-    @apply flex w-full items-stretch gap-2 overflow-x-auto rounded-[1.6rem] border px-2.5 py-2.5 backdrop-blur-2xl md:px-3 md:py-3;
-    width: min(100%, 76rem);
-    border-color: rgba(173, 198, 220, 0.12);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
-      rgba(7, 15, 22, 0.82);
-    box-shadow: 0 26px 62px rgba(1, 6, 12, 0.35);
+    @apply flex items-center justify-center gap-2 overflow-x-auto rounded-[1.5rem] border px-4 py-2 backdrop-blur-2xl;
+    width: max-content;
+    max-width: min(100%, 76rem);
+    margin: 0 auto;
+    border-color: rgba(148, 163, 184, 0.15);
+    background: rgba(11, 17, 23, 0.85);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
     scrollbar-width: thin;
     scrollbar-color: rgba(88, 214, 218, 0.35) rgba(255, 255, 255, 0.04);
     pointer-events: auto;
@@ -2284,16 +2332,14 @@ textarea {
   }
 
   .os-dock-button {
-    @apply relative flex min-w-[92px] shrink-0 flex-col items-center gap-1.5 rounded-[1.25rem] border px-2.5 py-2 text-center transition-all duration-200 sm:min-w-[112px] sm:px-3;
-    border-color: rgba(173, 198, 220, 0.1);
-    background: rgba(255, 255, 255, 0.04);
+    @apply relative flex min-w-[72px] shrink-0 flex-col items-center gap-1.5 rounded-xl border border-transparent px-2 py-2 text-center transition-all duration-200;
     color: var(--text-secondary);
   }
 
   .os-dock-button:hover {
-    transform: translateY(-2px);
-    border-color: rgba(88, 214, 218, 0.2);
-    background: rgba(255, 255, 255, 0.075);
+    transform: translateY(-4px) scale(1.05);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(102, 255, 102, 0.2);
   }
 
   .os-dock-button-active {
@@ -2308,7 +2354,9 @@ textarea {
   }
 
   .os-dock-button-icon {
-    @apply h-9 w-9 text-sm;
+    @apply flex h-9 w-9 items-center justify-center rounded-[0.8rem] text-base;
+    background: rgba(255, 255, 255, 0.06);
+    color: #80e8ff;
   }
 
   .os-dock-button-label {
@@ -2374,11 +2422,11 @@ textarea {
 
   @media (max-width: 767px) {
     .section {
-      @apply py-16;
+      @apply py-10;
     }
 
     .public-section {
-      @apply py-20;
+      @apply py-12;
     }
 
     .section-frame {
@@ -2386,9 +2434,11 @@ textarea {
     }
 
     .public-nav-shell {
+      @apply mx-4 mt-2;
       box-shadow: 0 12px 24px rgba(1, 6, 12, 0.18);
-      border-radius: 1.05rem;
-      padding: 0.48rem 0.58rem;
+      border-radius: 1rem;
+      padding: 0.5rem;
+      background: rgba(8, 16, 23, 0.85);
     }
 
     .public-nav-shell > .flex {
@@ -2405,8 +2455,13 @@ textarea {
     }
 
     .public-nav-links {
-      gap: 0.28rem;
-      padding-bottom: 0;
+      @apply flex overflow-x-auto gap-3 pb-0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .public-nav-links::-webkit-scrollbar {
+      display: none;
     }
 
     .public-nav-link {
@@ -2451,9 +2506,9 @@ textarea {
     }
 
     .public-hero-title {
-      margin-top: 0.82rem;
-      font-size: 2.72rem;
-      max-width: 8.8ch;
+      margin-top: 1rem;
+      font-size: clamp(2.5rem, 8vw, 3.5rem);
+      line-height: 1.05;
     }
 
     .public-hero-title-line {
@@ -2472,8 +2527,9 @@ textarea {
     }
 
     .public-hero-body {
-      margin-top: 0.95rem;
-      line-height: 1.58rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .public-hero-actions {
@@ -2665,7 +2721,6 @@ textarea {
 
     .app-portfolio-card {
       gap: 1.1rem;
-      padding: 1rem;
       border-radius: 0.85rem;
     }
 

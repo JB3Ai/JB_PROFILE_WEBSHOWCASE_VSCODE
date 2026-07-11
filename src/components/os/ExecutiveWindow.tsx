@@ -25,9 +25,9 @@ export default function ExecutiveWindow({
       <div className="os-window-header">
         <div className="os-window-header-main">
           <div className="os-window-controls" aria-hidden="true">
-            <span className="status-dot status-dot-danger" />
-            <span className="status-dot status-dot-gold" />
-            <span className="status-dot status-dot-green" />
+            <span className="os-window-dot close" />
+            <span className="os-window-dot minimize" />
+            <span className="os-window-dot maximize" />
           </div>
 
           <div className="os-window-title-group">

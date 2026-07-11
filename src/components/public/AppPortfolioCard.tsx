@@ -53,7 +53,7 @@ export default function AppPortfolioCard({
 
   return (
     <motion.article
-      className={`app-portfolio-card ${shouldRenderImage ? 'app-portfolio-card-with-image' : ''} ${
+      className={`app-portfolio-card glass-panel-premium ${shouldRenderImage ? 'app-portfolio-card-with-image' : ''} ${
         isInactive ? 'app-portfolio-card-inactive' : ''
       } ${className}`.trim()}
       aria-disabled={isInactive || undefined}
