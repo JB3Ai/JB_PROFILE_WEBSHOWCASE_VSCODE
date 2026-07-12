@@ -23,11 +23,19 @@ jobs:
       - name: Build site
         run: npm run build
 
+      - name: Validate deploy inputs
+        run: |
+          if [ -z "${{ secrets.FTP_PASSWORD }}" ]; then
+            echo "::error::Missing required secret FTP_PASSWORD. Add it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          echo "Deploy target: ftp.jonoblackburn.com -> /home/jonoblac/public_html/"
+
       - name: Deploy dist contents via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          server: ftp.jonoblackburn.com
+          username: jonoblac
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_TARGET_DIR }}
+          server-dir: /home/jonoblac/public_html/
