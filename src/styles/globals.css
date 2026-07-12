@@ -1034,7 +1034,7 @@ textarea {
   }
 
   .public-hero-stage {
-    @apply relative min-h-[27rem] overflow-hidden rounded-[1.2rem] border p-5 md:min-h-[33rem] md:p-7;
+    @apply relative grid gap-4 overflow-hidden rounded-[1.2rem] border p-5 md:gap-5 md:p-7;
     border-color: rgba(173, 198, 220, 0.08);
     background:
       linear-gradient(135deg, rgba(233, 201, 143, 0.075), transparent 30%),
@@ -1043,8 +1043,12 @@ textarea {
     box-shadow: 0 18px 40px rgba(1, 6, 12, 0.14);
   }
 
-  .public-stage-copy {
-    @apply relative z-10 flex max-w-sm flex-col gap-2;
+  .public-stage-copy-panel {
+    @apply relative z-10 flex flex-col gap-2 rounded-[0.85rem] border px-4 py-3.5 md:px-5 md:py-4;
+    border-color: rgba(173, 198, 220, 0.14);
+    background: rgba(8, 15, 22, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   .public-stage-label {
@@ -1058,7 +1062,7 @@ textarea {
   }
 
   .public-stage-asset {
-    @apply absolute inset-x-6 bottom-[5.4rem] top-40 rounded-[1rem] border;
+    @apply relative min-h-[18rem] rounded-[1rem] border md:min-h-[20rem];
     border-color: rgba(173, 198, 220, 0.08);
     background:
       linear-gradient(180deg, rgba(233, 201, 143, 0.052), transparent 24%),
@@ -1067,9 +1071,27 @@ textarea {
   }
 
   .public-stage-detail {
-    @apply absolute inset-x-6 bottom-6 z-10 rounded-[0.8rem] border px-4 py-3.5 backdrop-blur-xl;
+    @apply relative z-10 rounded-[0.8rem] border px-4 py-3.5 backdrop-blur-xl;
     border-color: rgba(173, 198, 220, 0.08);
-    background: rgba(8, 15, 22, 0.44);
+    background: rgba(8, 15, 22, 0.62);
+  }
+
+  @media (min-width: 1024px) {
+    .public-hero-stage {
+      grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+      align-items: stretch;
+    }
+
+    .public-stage-copy-panel,
+    .public-stage-detail {
+      max-width: 100%;
+    }
+
+    .public-stage-asset {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      min-height: 100%;
+    }
   }
 
   .public-stage-detail-title {
@@ -1346,23 +1368,20 @@ textarea {
   }
 
   .app-portfolio-card {
-    @apply relative grid gap-6 overflow-hidden p-6 md:p-8;
-    isolation: isolate;
+    @apply relative grid gap-6 overflow-hidden transition-all duration-500 p-6 md:p-8;
+    border-radius: 16px;
+    background: rgba(18, 23, 31, 0.45);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.2);
   }
 
-  .app-portfolio-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    background: linear-gradient(90deg, rgba(88, 214, 218, 0.05), transparent 38%);
-    pointer-events: none;
-  }
-
-  .app-portfolio-card > * {
-    position: relative;
-    z-index: 1;
+  .app-portfolio-card:hover {
+    transform: translateY(-4px);
+    background: rgba(18, 23, 31, 0.65);
+    border-color: rgba(102, 255, 102, 0.3);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 20px rgba(102, 255, 102, 0.05);
   }
 
   .app-portfolio-card-with-image {
@@ -2594,19 +2613,19 @@ textarea {
     }
 
     .public-hero-stage {
-      min-height: 22.5rem;
+      gap: 0.75rem;
       padding: 0.85rem;
     }
 
+    .public-stage-copy-panel {
+      padding: 0.72rem 0.82rem;
+    }
+
     .public-stage-asset {
-      inset-inline: 1rem;
-      top: 9.6rem;
-      bottom: 4.45rem;
+      min-height: 14rem;
     }
 
     .public-stage-detail {
-      inset-inline: 1rem;
-      bottom: 0.9rem;
       padding: 0.72rem 0.82rem;
     }
 
