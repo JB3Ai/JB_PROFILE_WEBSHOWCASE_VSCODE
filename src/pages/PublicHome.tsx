@@ -70,7 +70,7 @@ const batch01SelectedCards: AppPortfolioCardProps[] = [
     resourceLinks: [
       {
         label: 'View cut sheet',
-        href: '/resources/product-cutsheets/os3-core-clipboardai-cutsheet-v01.pdf',
+        href: '/assets/pdfs/OS³ ClipboardAi CUTSHEET.pdf',
         ariaLabel: 'View ClipboardAi cut sheet'
       }
     ],
@@ -79,10 +79,14 @@ const batch01SelectedCards: AppPortfolioCardProps[] = [
 ]
 
 export default function PublicHome() {
+  const EXCLUSIVE_PORTAL_EMAIL_KEY = 'jb-exclusive-portal-email'
   usePageMetadata(pageMetadata.home)
   const nav = useNavigate()
   const [bootStatus, setBootStatus] = useState<'checking' | 'booting' | 'ready'>('checking')
   const [revealedFromBoot, setRevealedFromBoot] = useState(false)
+  const [portalEmail, setPortalEmail] = useState('')
+  const [portalMessage, setPortalMessage] = useState<string | null>(null)
+  const sectionRevealTransition = { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -110,7 +114,7 @@ export default function PublicHome() {
   }, [])
 
   const handleFounderBriefClick = useCallback(() => {
-    scrollToSection('founder-brief', {
+    scrollToSection('founder', {
       fallback: () =>
         nav(
           buildRequestAccessRoute({
@@ -136,8 +140,28 @@ export default function PublicHome() {
   }, [nav])
 
   const handleTimelineClick = useCallback(() => {
-    scrollToSection('timeline')
+    scrollToSection('founder-timeline')
   }, [])
+
+  const handlePortalGateSubmit = useCallback(
+    (event: React.FormEvent) => {
+      event.preventDefault()
+      const normalizedEmail = portalEmail.trim().toLowerCase()
+
+      if (!normalizedEmail || !normalizedEmail.includes('@') || !normalizedEmail.includes('.')) {
+        setPortalMessage('Enter a valid email so we can prepare your exclusive portal preview.')
+        return
+      }
+
+      if (typeof window !== 'undefined') {
+        window.sessionStorage.setItem(EXCLUSIVE_PORTAL_EMAIL_KEY, normalizedEmail)
+      }
+
+      setPortalMessage('Welcome. Routing you to the Exclusive Portal entry layer...')
+      nav('/os')
+    },
+    [nav, portalEmail]
+  )
 
   const mediaSignalItems: ProofBandItem[] = [
     {
@@ -205,8 +229,8 @@ export default function PublicHome() {
           transition={{ duration: revealedFromBoot ? 0.55 : 0, ease: 'easeOut' }}
         >
           <PublicNav />
-          <div className="hero-orb left-[-10rem] top-[4rem] h-72 w-72 bg-cyan-300/14" />
-          <div className="hero-orb right-[-8rem] top-[14rem] h-72 w-72 bg-emerald-300/12" />
+          <div className="hero-orb left-[-10rem] top-[4rem] h-72 w-72 bg-amber-300/24" />
+          <div className="hero-orb right-[-8rem] top-[14rem] h-72 w-72 bg-orange-300/16" />
           <div className="hero-orb bottom-[22rem] right-[8%] h-60 w-60 bg-amber-200/10" />
 
           <section id="hero" className="public-hero section-anchor">
@@ -241,22 +265,6 @@ export default function PublicHome() {
                       onClick={handleProjectsClick}
                     >
                       Explore Projects
-                    </PremiumButton>
-                    <PremiumButton
-                      variant="accent"
-                      size="lg"
-                      className="public-hero-cta public-hero-cta-accent"
-                      onClick={() =>
-                        nav(
-                          buildRequestAccessRoute({
-                            track: 'hero',
-                            reason: 'General access request',
-                            next: 'Request a conversation'
-                          })
-                        )
-                      }
-                    >
-                      Request Access
                     </PremiumButton>
                   </div>
                   <button type="button" onClick={() => nav('/login')} className="public-link-button">
@@ -294,101 +302,259 @@ export default function PublicHome() {
             </div>
           </section>
 
-          <ManifestoPanel />
-
-          <FounderManualSection />
-
-          <EditorialSection
-            id="product-architecture"
-            lead="Product Architecture"
-            title="A controlled public preview of the OS³ product architecture."
-            intro="The platform layer now appears before the deeper founder-history and proof sections, giving visitors a clearer view of the systems being built: OS³ Dash, JB³Ai Super Agent OS, and ClipboardAi. Held products remain out of view until separate reviews clear them."
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
           >
-            <div className="grid gap-5">
-              {batch01SelectedCards.map((card) => (
-                <AppPortfolioCard key={card.name} {...card} />
-              ))}
-            </div>
-          </EditorialSection>
+            <ManifestoPanel />
+          </motion.div>
 
-          <SupportWorkStrip />
-
-          <EditorialSection
-            id="timeline"
-            lead="Founder Journey"
-            title="The founder path behind the systems."
-            intro="After the platform and Isikolo mission are clear, the public journey returns to the chapters that shaped the work: engineering, recovery, care, diagnostics, rebuilding, and the discipline of turning pressure into structure."
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
           >
-            <div className="journey-track">
-              {timelineEvents.map((event, index) => (
-                <motion.article
-                  key={event.id}
-                  className="journey-item"
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ delay: index * 0.04, duration: 0.55, ease: 'easeOut' }}
-                >
-                  <div className="journey-period">{event.period}</div>
-                  <div className="journey-content">
-                    <p className="public-meta-line">
-                      <span>{event.category}</span>
-                      <span>{event.visibility}</span>
-                    </p>
-                    <h3 className="selected-work-row-title">{event.title}</h3>
-                    <p className="public-copy">{event.summary}</p>
+            <FounderManualSection />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
+          >
+            <EditorialSection
+              id="product-architecture"
+              lead="Product Architecture"
+              title="A controlled public preview of the OS³ product architecture."
+              intro="The platform layer now appears before the deeper founder-history and proof sections, giving visitors a clearer view of the systems being built: OS³ Dash, JB³Ai Super Agent OS, and ClipboardAi. Held products remain out of view until separate reviews clear them."
+            >
+              <div className="projects-media-widget">
+                <p className="public-meta-line">
+                  <span>Applications Showcase</span>
+                  <span>Scrolling Screenshot Widget</span>
+                </p>
+                <div className="projects-media-track">
+                  {batch01SelectedCards.map((card) => (
+                    <article key={`${card.name}-media`} className="projects-media-item">
+                      <AssetThumbnail
+                        src={card.imageSrc}
+                        fallbackSrc={assetRegistry.projectPlaceholder}
+                        alt={card.imageAlt ?? `${card.name} preview`}
+                        className="projects-media-asset"
+                        imageClassName="product-media-image"
+                        sizes="(max-width: 1024px) 80vw, 28vw"
+                      />
+                      <div className="projects-media-copy">
+                        <h3>{card.name}</h3>
+                        <p>{card.shortDescription}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="projects-stack-deck">
+                {batch01SelectedCards.map((card, index) => (
+                  <div key={card.name} className="projects-stack-layer">
+                    <div
+                      className="projects-stack-sticky"
+                      style={{
+                        top: `calc(5.2rem + ${index * 0.4}rem)`,
+                        zIndex: 40 + index
+                      }}
+                    >
+                      <AppPortfolioCard {...card} className="projects-stack-card" />
+                    </div>
                   </div>
-                </motion.article>
-              ))}
-            </div>
-          </EditorialSection>
+                ))}
+              </div>
+            </EditorialSection>
+          </motion.div>
 
-          <FounderPhaseStrip />
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
+          >
+            <SupportWorkStrip />
+          </motion.div>
 
-          <GTR3Spotlight
-            content={gtr3Content}
-            onPrimaryAction={() =>
-              nav(
-                buildRequestAccessRoute({
-                  track: 'gtr3',
-                  reason: 'GTR³ preview request',
-                  next: 'Request a conversation'
-                })
-              )
-            }
-            onSecondaryAction={handleTimelineClick}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
+          >
+            <GTR3Spotlight
+              content={gtr3Content}
+              onPrimaryAction={() =>
+                nav(
+                  buildRequestAccessRoute({
+                    track: 'gtr3',
+                    reason: 'GTR³ preview request',
+                    next: 'Request a conversation'
+                  })
+                )
+              }
+              onSecondaryAction={handleTimelineClick}
+            />
+          </motion.div>
 
-          <ProofBand
-            id="video-vault"
-            lead="Media and Signals"
-            title="A curated signal layer for briefings, previews, and public notes."
-            intro="After the product, mission, and founder arc are established, this band keeps media lightweight: selected briefings, JB³ Daily Show entries, and public feed signals without overfilling the homepage."
-            items={mediaSignalItems}
-            ctaLabel="Preview Private OS"
-            onCta={() => nav('/login')}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
+          >
+            <ProofBand
+              id="projects-media"
+              lead="Media and Signals"
+              title="A curated signal layer for briefings, previews, and public notes."
+              intro="After the product, mission, and founder arc are established, this band keeps media lightweight: selected briefings, JB³ Daily Show entries, and public feed signals without overfilling the homepage."
+              items={mediaSignalItems}
+              ctaLabel="Preview Private OS"
+              onCta={() => nav('/login')}
+            />
+          </motion.div>
 
-          <ProofBand
-            id="evidence-vault"
-            lead="Evidence and Trust"
-            title="Proof stays contextual, permission-aware, and restrained."
-            intro="The trust layer remains deliberately minimal: enough public signal to establish credibility, without exposing private packs, investor files, or sensitive operating material."
-            items={trustPreviewItems}
-            ctaLabel="Request Evidence Access"
-            onCta={() =>
-              nav(
-                buildRequestAccessRoute({
-                  track: 'evidence',
-                  reason: 'Evidence or trust layer review',
-                  next: 'Request evidence review'
-                })
-              )
-            }
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
+          >
+            <ProofBand
+              id="founder-evidence"
+              lead="Evidence and Trust"
+              title="Proof stays contextual, permission-aware, and restrained."
+              intro="The trust layer remains deliberately minimal: enough public signal to establish credibility, without exposing private packs, investor files, or sensitive operating material."
+              items={trustPreviewItems}
+              ctaLabel="Request Evidence Access"
+              onCta={() =>
+                nav(
+                  buildRequestAccessRoute({
+                    track: 'evidence',
+                    reason: 'Evidence or trust layer review',
+                    next: 'Request evidence review'
+                  })
+                )
+              }
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
+          >
+            <EditorialSection
+              id="founder-timeline"
+              lead="Founder Journey"
+              title="The founder path behind the systems."
+              intro="After the platform and Isikolo mission are clear, the public journey returns to the chapters that shaped the work: engineering, recovery, care, diagnostics, rebuilding, and the discipline of turning pressure into structure."
+            >
+              <div className="journey-track">
+                {timelineEvents.map((event, index) => (
+                  <motion.article
+                    key={event.id}
+                    className="journey-item"
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ delay: index * 0.05, duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <div className="journey-period">{event.period}</div>
+                    <div className="journey-content">
+                      <p className="public-meta-line">
+                        <span>{event.category}</span>
+                        <span>{event.visibility}</span>
+                      </p>
+                      <h3 className="selected-work-row-title">{event.title}</h3>
+                      <p className="public-copy">{event.summary}</p>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            </EditorialSection>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
+          >
+            <FounderPhaseStrip />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={sectionRevealTransition}
+          >
+            <EditorialSection
+              id="intelligence-tools"
+              lead="Investigative and Intelligence Tools"
+              title="Exclusive intelligence access for serious operators, investigators, and partners."
+              intro="This is a private layer. Share your details to unlock the portal preview and receive guided access to deeper tools, briefings, and protected intelligence modules."
+            >
+              <div className="intel-teaser-grid">
+                <div className="intel-teaser-copy">
+                  <p className="public-meta-line">
+                    <span>OSINT and Investigation Desk</span>
+                    <span>Exclusive Portal</span>
+                  </p>
+                  <p className="public-copy">
+                    Inside the portal, trusted users can navigate structured intelligence modules, investigative toolsets,
+                    protected workflow previews, and founder briefings that are intentionally held back from the public layer.
+                  </p>
+                  <ul className="intel-teaser-list">
+                    <li>Investigation workflows and case structures</li>
+                    <li>Intelligence analysis and briefing modules</li>
+                    <li>Secure document vault and CV access zone</li>
+                  </ul>
+                </div>
+
+                <form className="intel-teaser-gate" onSubmit={handlePortalGateSubmit}>
+                  <label htmlFor="portal-email" className="conversion-label">
+                    Enter your email to request portal entry
+                  </label>
+                  <input
+                    id="portal-email"
+                    type="email"
+                    className="input-shell"
+                    autoComplete="email"
+                    value={portalEmail}
+                    onChange={(event) => setPortalEmail(event.target.value)}
+                    placeholder="you@company.com"
+                  />
+                  <div className="intel-teaser-actions">
+                    <PremiumButton type="submit" variant="accent" size="lg">
+                      Request Portal Invite
+                    </PremiumButton>
+                    <PremiumButton type="button" variant="ghost" size="lg" onClick={() => nav('/login')}>
+                      View Entry Requirements
+                    </PremiumButton>
+                  </div>
+                  {portalMessage ? (
+                    <p className="conversion-status" role="status" aria-live="polite">
+                      {portalMessage}
+                    </p>
+                  ) : null}
+                </form>
+              </div>
+            </EditorialSection>
+          </motion.div>
 
           <EditorialSection
-            id="investor-room"
+            id="founder-investor"
             lead="Investor Access"
             title="Verified review access for serious partners."
             intro={founderProfile.investorSummary}

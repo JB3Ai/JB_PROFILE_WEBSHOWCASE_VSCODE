@@ -3,29 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { PremiumButton } from '../primitives'
 import { scrollToSection } from '../../utils/scrollToSection'
 import { assetRegistry } from '../../data/assetRegistry'
-import { buildRequestAccessRoute } from '../../data/contactConfig'
 
 const navLinks = [
-  { id: 'founder-brief', label: 'Founder' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'video-vault', label: 'Media' },
-  { id: 'evidence-vault', label: 'Evidence' },
-  { id: 'investor-room', label: 'Investor' },
-  { id: 'timeline', label: 'Timeline' },
+  { id: 'founder', label: 'Founder' },
+  { id: 'product-architecture', label: 'Projects' },
   { id: 'gtr3', label: 'GTR³' },
   { id: 'connect', label: 'Connect' }
 ] as const
 
 const sectionIds = [
   'hero',
-  'founder-brief',
-  'projects',
-  'video-vault',
-  'jb3-daily-show',
-  'public-feed',
-  'evidence-vault',
-  'investor-room',
-  'timeline',
+  'founder',
+  'product-architecture',
   'gtr3',
   'connect'
 ] as const
@@ -33,6 +22,7 @@ const sectionIds = [
 export default function PublicNav() {
   const nav = useNavigate()
   const [activeSection, setActiveSection] = useState<string>('hero')
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     const sections = sectionIds
@@ -96,19 +86,26 @@ export default function PublicNav() {
     }
   }, [])
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 24)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <div className="sticky top-3 z-40 px-4 pt-4 md:top-4 md:px-6">
+    <div className={`sticky z-40 px-4 transition-all duration-300 ${scrolled ? 'top-2 pt-2 md:top-3 md:pt-3' : 'top-3 pt-4 md:top-4'}`}>
       <div className="container-shell-wide">
-        <div className="public-nav-shell">
+        <div className={`public-nav-shell transition-all duration-300 ${scrolled ? 'md:px-4 md:py-2.5 shadow-[0_14px_34px_rgba(44,33,20,0.14)]' : ''}`}>
           <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
             <div className="public-nav-brand">
               <img
                 src={assetRegistry.logoMark}
                 alt="Jonathan Blackburn OS logo mark"
-                className="h-8 w-8 rounded-full border border-white/10 bg-white/5 p-1.5"
+                className="h-8 w-8 rounded-full border border-[rgba(140,108,70,0.24)] bg-white/80 p-1.5"
               />
               <div>
-                <div className="text-sm font-semibold tracking-[-0.01em] text-white">Jonathan Blackburn OS</div>
+                <div className="text-sm font-semibold tracking-[-0.01em] text-[var(--text-primary)]">Jonathan Blackburn OS</div>
                 <div className="public-nav-caption">Founder platform</div>
               </div>
             </div>
@@ -128,22 +125,7 @@ export default function PublicNav() {
 
             <div className="public-nav-actions">
               <PremiumButton variant="secondary" size="sm" onClick={() => nav('/login')}>
-                Preview Private OS
-              </PremiumButton>
-              <PremiumButton
-                variant="accent"
-                size="sm"
-                onClick={() =>
-                  nav(
-                    buildRequestAccessRoute({
-                      track: 'public-nav',
-                      reason: 'General access request',
-                      next: 'Request a conversation'
-                    })
-                  )
-                }
-              >
-                Request Access
+                Enter Exclusive Portal
               </PremiumButton>
             </div>
           </div>
