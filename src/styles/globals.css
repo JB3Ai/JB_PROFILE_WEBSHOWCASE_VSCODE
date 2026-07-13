@@ -52,6 +52,17 @@
   }
 }
 
+@keyframes orbFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0) scale(1.03);
+  }
+}
+
 .os-window-pop {
   animation: windowPop 0.34s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform, opacity;
@@ -511,6 +522,18 @@ textarea {
     filter: blur(54px);
     opacity: 0.32;
     pointer-events: none;
+    animation: orbFloat 9.5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .hero-orb:nth-of-type(2) {
+    animation-delay: 1.2s;
+    animation-duration: 11.5s;
+  }
+
+  .hero-orb:nth-of-type(3) {
+    animation-delay: 2.4s;
+    animation-duration: 10.5s;
   }
 
   .asset-frame {

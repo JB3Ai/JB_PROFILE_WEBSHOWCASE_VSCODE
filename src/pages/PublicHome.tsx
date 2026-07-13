@@ -86,7 +86,11 @@ export default function PublicHome() {
   const [revealedFromBoot, setRevealedFromBoot] = useState(false)
   const [portalEmail, setPortalEmail] = useState('')
   const [portalMessage, setPortalMessage] = useState<string | null>(null)
-  const sectionRevealTransition = { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
+  const sectionReveal = (index: number) => ({
+    duration: 0.72,
+    delay: index * 0.055,
+    ease: [0.16, 1, 0.3, 1] as const
+  })
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -239,7 +243,7 @@ export default function PublicHome() {
                 <motion.div
                   initial={{ opacity: 0, y: 28 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.85, ease: 'easeOut' }}
+                  transition={{ duration: 0.92, ease: [0.16, 1, 0.3, 1] }}
                   className="public-hero-copy"
                 >
                   <p className="public-pretitle">{founderProfile.positioningLine}</p>
@@ -275,7 +279,7 @@ export default function PublicHome() {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.12, duration: 0.85, ease: 'easeOut' }}
+                  transition={{ delay: 0.12, duration: 0.96, ease: [0.16, 1, 0.3, 1] }}
                   className="public-hero-stage"
                 >
                   <div className="public-stage-copy-panel">
@@ -306,7 +310,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(0)}
           >
             <ManifestoPanel />
           </motion.div>
@@ -315,7 +319,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(1)}
           >
             <FounderManualSection />
           </motion.div>
@@ -324,7 +328,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(2)}
           >
             <EditorialSection
               id="product-architecture"
@@ -379,7 +383,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(3)}
           >
             <SupportWorkStrip />
           </motion.div>
@@ -388,7 +392,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(4)}
           >
             <GTR3Spotlight
               content={gtr3Content}
@@ -409,7 +413,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(5)}
           >
             <ProofBand
               id="projects-media"
@@ -426,7 +430,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(6)}
           >
             <ProofBand
               id="founder-evidence"
@@ -451,7 +455,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(7)}
           >
             <EditorialSection
               id="founder-timeline"
@@ -467,7 +471,7 @@ export default function PublicHome() {
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={{ delay: index * 0.05, duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ delay: 0.08 + index * 0.045, duration: 0.66, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <div className="journey-period">{event.period}</div>
                     <div className="journey-content">
@@ -488,7 +492,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(8)}
           >
             <FounderPhaseStrip />
           </motion.div>
@@ -497,7 +501,7 @@ export default function PublicHome() {
             initial={{ opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={sectionRevealTransition}
+            transition={sectionReveal(9)}
           >
             <EditorialSection
               id="intelligence-tools"
