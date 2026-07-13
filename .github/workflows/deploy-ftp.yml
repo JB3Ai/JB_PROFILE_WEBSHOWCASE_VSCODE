@@ -29,7 +29,7 @@ jobs:
             echo "::error::Missing required secret FTP_PASSWORD. Add it in Settings > Secrets and variables > Actions."
             exit 1
           fi
-          echo "Deploy target: ftp.jonoblackburn.com -> /home/jonoblac/public_html/"
+          echo "Deploy target: ftp.jonoblackburn.com -> /public_html/"
 
       - name: Deploy dist contents via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -38,4 +38,4 @@ jobs:
           username: jonoblac
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: /home/jonoblac/public_html/
+          server-dir: /public_html/
