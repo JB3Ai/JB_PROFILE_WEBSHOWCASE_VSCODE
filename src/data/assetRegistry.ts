@@ -11,6 +11,8 @@ export const assetRegistry = {
   os3DashCommandDashboard: '/assets/images/artwork-curated/os3-dash-command-dashboard.jpg',
   jb3aiSuperAgentOsArchitecture: '/assets/images/artwork-curated/jb3ai-super-agent-os-architecture.jpg',
   clipboardAiPrivateWorkspace: '/assets/images/artwork-curated/clipboard-ai-private-workspace.jpg',
+  gtr3CinematicBanner: '/assets/images/artwork-curated/gtr3-cinematic-banner.png',
+  evidenceTrustVisual: '/assets/images/artwork-curated/evidence-trust-visual.jpg',
   founderHeroPlaceholder: '/assets/placeholders/founder-hero-placeholder.svg',
   founderPortraitPlaceholder: '/assets/placeholders/founder-placeholder.svg',
   gtr3HeroPlaceholder: '/assets/placeholders/gtr3-hero-placeholder.svg',
