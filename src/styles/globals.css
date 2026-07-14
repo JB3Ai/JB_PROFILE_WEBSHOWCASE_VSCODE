@@ -1686,7 +1686,7 @@ textarea {
   }
 
   .app-portfolio-card-asset {
-    @apply min-h-[15rem] rounded-[0.85rem];
+    @apply min-h-[24rem] rounded-[0.85rem];
     box-shadow: 0 16px 32px rgba(1, 7, 16, 0.16);
   }
 
@@ -3216,7 +3216,7 @@ textarea {
     }
 
     .app-portfolio-card-asset {
-      min-height: 13rem;
+      min-height: 20rem;
     }
 
     .asset-overlay {
