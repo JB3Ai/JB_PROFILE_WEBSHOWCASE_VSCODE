@@ -61,25 +61,25 @@ export default function SupportWorkStrip() {
           <div className="grid gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(320px,1fr)] lg:items-center">
             <div>
               <p className="public-kicker">Support</p>
-              <h2 className="public-title">Sponsor Isikolo</h2>
+              <h2 className="public-title" style={{ color: '#ffffff' }}>Sponsor Isikolo</h2>
               <div className="mt-4 space-y-3">
-                <p className="public-intro">Isikolo is built.</p>
-                <p className="public-copy">
+                <p className="public-intro" style={{ color: 'rgba(220, 220, 220, 0.95)' }}>Isikolo is built.</p>
+                <p className="public-copy" style={{ color: 'rgba(180, 188, 196, 0.9)' }}>
                   It is a free AI-powered education app created to support South African learners with
                   schoolwork, study help, revision, explanations, and practical learning support.
                 </p>
-                <p className="public-copy">
+                <p className="public-copy" style={{ color: 'rgba(180, 188, 196, 0.9)' }}>
                   The mission is simple: keep Isikolo free for learners in South Africa.
                 </p>
-                <p className="public-copy">
+                <p className="public-copy" style={{ color: 'rgba(180, 188, 196, 0.9)' }}>
                   We are opening founding support to help fund the next phase: AI credits, hosting,
                   platform infrastructure, curriculum content, local language support, learner access,
                   and continued development.
                 </p>
-                <p className="public-copy">
+                <p className="public-copy" style={{ color: 'rgba(180, 188, 196, 0.9)' }}>
                   International supporters, sponsors, and partners can help make free access possible.
                 </p>
-                <p className="public-copy">
+                <p className="public-copy" style={{ color: 'rgba(180, 188, 196, 0.9)' }}>
                   Isikolo is built.
                   <br />
                   Now help keep it free.
