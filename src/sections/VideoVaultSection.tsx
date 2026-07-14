@@ -32,7 +32,7 @@ export default function VideoVaultSection() {
         <SectionHeader
           eyebrow="Video Layer"
           title="Video Vault"
-          subtitle="Founder briefings, product demos, project walkthroughs, media clips, and GTR3 teasers."
+          subtitle="Founder briefings, product demos, project walkthroughs, media clips, and GTR³ teasers."
         />
 
         <motion.div

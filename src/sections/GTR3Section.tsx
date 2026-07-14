@@ -24,7 +24,7 @@ export default function GTR3Section() {
               <AssetThumbnail
                 src={assetRegistry.gtr3Placeholder}
                 fallbackSrc={assetRegistry.gtr3Placeholder}
-                alt="GTR3 preview placeholder artwork"
+                alt="GTR³ preview placeholder artwork"
                 className="mb-5 h-48"
               />
               <p className="text-caption text-amber-200">Story Preview</p>
