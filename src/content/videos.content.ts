@@ -95,7 +95,7 @@ export const videos: VideoItem[] = [
     summary:
       'A teaser for the GTR³ book and third-rise story layer inside Jonathan Blackburn OS.',
     relatedProjectId: null,
-    thumbnail: '/assets/images/video-gtr3.jpg',
+    thumbnail: '/assets/images/artwork-curated/gtr3-cinematic-banner.png',
     videoUrl: '/assets/videos/gtr3-coming-soon.mp4',
     access: 'public',
     tags: ['gtr3', 'book', 'story', 'coming-soon']
