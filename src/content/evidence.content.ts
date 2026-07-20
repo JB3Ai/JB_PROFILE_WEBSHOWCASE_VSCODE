@@ -11,7 +11,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "A structured executive profile covering Jonathan Blackburn’s founder journey, business history, technical capability, and current JB³Ai direction.",
     documentType: "PDF / DOCX",
-    fileUrl: "/assets/pdfs/executive-cv-portfolio.pdf",
+    fileUrl: "/assets/pdfs/Jonathan_Blackburn_Premium_Resume.pdf",
     thumbnail: assetRegistry.evidencePlaceholder,
     tags: ["cv", "profile", "founder"],
     cautionNote:
@@ -26,7 +26,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "A skills profile covering business strategy, systems architecture, AI product design, automation, media systems, and technical build capability.",
     documentType: "Profile",
-    fileUrl: "/assets/pdfs/core-skills-matrix.pdf",
+    fileUrl: "/assets/pdfs/Jonathan Blackburn Resume.pdf",
     thumbnail: "/assets/images/evidence-skills.jpg",
     tags: ["skills", "technical", "systems"],
     cautionNote: ""
@@ -40,7 +40,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "Public recognition connected to Jonathan Blackburn and iMED Distributors as a finalist in the Top Empowerment Awards 2022.",
     documentType: "Award Certificate",
-    fileUrl: "/assets/pdfs/top-empowerment-finalist-2022.pdf",
+    fileUrl: "/assets/images/artwork-curated/top-empowerment-award.jpg",
     thumbnail: "/assets/images/evidence-top-empowerment.jpg",
     tags: ["award", "imed", "entrepreneur"],
     cautionNote:
@@ -55,7 +55,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "Public finalist recognition for The Entrepreneur Award, supporting the founder turnaround and enterprise-building story.",
     documentType: "Award Certificate",
-    fileUrl: "/assets/pdfs/absa-jewish-achiever-finalist-2022.pdf",
+    fileUrl: "/assets/pdfs/Jewish_Achiever_finalist.pdf",
     thumbnail: "/assets/images/evidence-jewish-achiever.jpg",
     tags: ["award", "entrepreneur", "recognition"],
     cautionNote:
@@ -70,7 +70,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "Training evidence supporting Jonathan’s molecular diagnostics and DNA-related iMED chapter.",
     documentType: "Certificate",
-    fileUrl: "/assets/pdfs/essential-dna-sequencing.pdf",
+    fileUrl: "/assets/pdfs/Ess DNA Seq__Attendance Certificates__Nov 2021_Jonathan Blackburn.pdf",
     thumbnail: "/assets/images/evidence-dna.jpg",
     tags: ["dna", "imed", "certificate"],
     cautionNote:
@@ -85,7 +85,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "Quality management systems training linked to process design, compliance thinking, and operational structure.",
     documentType: "Certificate",
-    fileUrl: "/assets/pdfs/iso-9001-qms.pdf",
+    fileUrl: "/assets/pdfs/ISO_implementation_auditing.pdf",
     thumbnail: "/assets/images/evidence-iso.jpg",
     tags: ["iso", "quality", "systems"],
     cautionNote:
@@ -100,7 +100,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "A historical proof chapter covering iMED’s diagnostic, forensic, COVID-response, laboratory, and medical systems work.",
     documentType: "Case File",
-    fileUrl: "/assets/pdfs/imed-historical-proof-chapter.pdf",
+    fileUrl: "/assets/pdfs/JB³Ai Forensic Intelligence Systems OverviewV2-compressed.pdf",
     thumbnail: "/assets/images/evidence-imed.jpg",
     tags: ["imed", "laboratory", "historical"],
     cautionNote:
@@ -115,7 +115,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "A curated set of professional recommendations from clients, partners, colleagues, and business associates.",
     documentType: "Recommendations",
-    fileUrl: "/assets/pdfs/linkedin-recommendations.pdf",
+    fileUrl: "/assets/pdfs/Jonathan_LinkedIn_Recommendations.pdf",
     thumbnail: "/assets/images/evidence-recommendations.jpg",
     tags: ["recommendations", "clients", "leadership"],
     cautionNote:
@@ -130,7 +130,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "Controlled access due diligence material for verified investors, strategic partners, and formal review processes.",
     documentType: "Private Pack",
-    fileUrl: "/assets/pdfs/founder-due-diligence-pack.pdf",
+    fileUrl: "/assets/pdfs/JB³Ai Investment Deck Intelligence in Motion.pdf",
     thumbnail: "/assets/images/evidence-locked.jpg",
     tags: ["investor", "due-diligence", "locked"],
     cautionNote:
@@ -145,7 +145,7 @@ export const evidenceItems: EvidenceItem[] = [
     summary:
       "Private roadmap and product strategy material for the JB³Ai and Jonathan Blackburn OS ecosystem.",
     documentType: "Private Pack",
-    fileUrl: "/assets/pdfs/product-strategy-pack.pdf",
+    fileUrl: "/assets/pdfs/OS³ Core Platform Briefings-compressed.pdf",
     thumbnail: "/assets/images/evidence-locked.jpg",
     tags: ["strategy", "roadmap", "investor"],
     cautionNote:

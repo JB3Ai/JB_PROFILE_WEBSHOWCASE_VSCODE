@@ -59,7 +59,7 @@ Important:
 | `PDF-002` | `Copy of Sovereign VOICEGRID Infrastructure Manual.pdf` | PDF | JB³Ai / VoiceGrid | `INTERNAL` | Product source reference | Infrastructure manual; not a public route asset | `voicegrid-infrastructure-source-01.pdf` | Yes | Hold |
 | `PDF-003` | `Cyber-Noir Music Console Magazine-combined.pdf` | PDF | DukeBox / creative | `PUBLIC-EXTRACT` | Future creative project proof candidate | Review licensing, names, and media rights | `dukebox-cyber-noir-public-extract.pdf` | Yes | Hold |
 | `PDF-004` | `Elite Technologies Company profile..pdf` | PDF | Elite Technologies historical | `PUBLIC-EXTRACT` | Historical Signal phase proof candidate | Archive only; remove old contacts and current-operation confusion | `elite-technologies-historical-profile.pdf` | Yes | Hold |
-| `PDF-005` | `Global Satellite Overlay The Sentinel Eye.pdf` | PDF | JB³Ai / ViewGrid | `INTERNAL` | Product source reference | Sensitive positioning; hold from public routes | `viewgrid-sentinel-eye-source.pdf` | Yes | Hold |
+| `PDF-005` | `Global Satellite Overlay The Sentinel Eye.pdf` | PDF | JB³Ai / ViewGrid | `DELETED` | Removed 2026-07-20 | Superseded by compressed version | `viewgrid-sentinel-eye-source.pdf` | N/A | Archived |
 | `PDF-006` | `iMED Marketing Brochure 2025.pdf` | PDF | iMED historical | `BLOCKED` | None | Risks implying iMED is currently operating | `n/a` | Yes | Block public |
 | `PDF-007` | `JB³ ISIKOLO AI —final.pdf` | PDF | JB³Ai / education | `PUBLIC-EXTRACT` | Future JB³Ai product overview candidate | Review claims, contacts, and public readiness | `jb3ai-isikolo-public-extract.pdf` | Yes | Hold |
 | `PDF-008` | `JB³ OS³ Dash The Operating System.pdf` | PDF | JB³Ai / OS³ | `PUBLIC-EXTRACT` | Future OS³ overview candidate | Review claims and remove sensitive roadmap detail | `jb3ai-os3-dash-public-extract.pdf` | Yes | Hold |
@@ -122,7 +122,7 @@ Important:
 | `PDF-032` | `jb3ai-shieldai-silent-protection.pdf` | PDF | JB³Ai / specialist product | `INTERNAL` | Product source reference | Sensitive positioning; not public-ready | `jb3ai-shieldai-source.pdf` | Yes | Hold |
 | `PDF-033` | `MindCare AI.pdf` | PDF | JB³Ai / MindCare | `PUBLIC-EXTRACT` | Public product overview candidate | Review health/support claims and public wording | `mindcare-ai-public-extract.pdf` | Yes | Hold |
 | `PDF-034` | `OS³ Dash .pdf` | PDF | JB³Ai / OS³ | `PUBLIC-EXTRACT` | Public OS³ overview candidate | Review claims and public readiness | `os3-dash-public-extract.pdf` | Yes | Hold |
-| `PDF-035` | `VIEWGRID Global Satellite Overlay The Sentinel Eye.pdf` | PDF | JB³Ai / ViewGrid | `INTERNAL` | Product source reference | Sensitive positioning; hold from public routes | `viewgrid-sentinel-eye-source-02.pdf` | Yes | Hold |
+| `PDF-035` | `VIEWGRID Global Satellite Overlay The Sentinel Eye.pdf` | PDF | JB³Ai / ViewGrid | `DELETED` | Removed 2026-07-20 | Superseded by compressed version | `viewgrid-sentinel-eye-source-02.pdf` | N/A | Archived |
 | `PDF-036` | `VOICEGRID Call Centre Infrastructure.pdf` | PDF | JB³Ai / VoiceGrid | `INTERNAL` | Product source reference | Infrastructure detail; not public route material | `voicegrid-call-centre-source.pdf` | Yes | Hold |
 
 ## 19C Public Extract Shortlist

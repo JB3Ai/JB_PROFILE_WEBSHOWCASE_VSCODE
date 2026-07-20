@@ -9,7 +9,7 @@ export const projects: ProjectItem[] = [
     status: 'Public Preview',
     summary:
       'A creative web and media experience exploring music culture, visual identity, and immersive digital storytelling.',
-    pdf: '/assets/pdfs/dukebox-product-profile.pdf',
+    pdf: '/assets/pdfs/OS³ DukeBoxLONDON Ai CUTSHEET.pdf',
     video: '/assets/videos/dukebox-preview.mp4',
     image: '/assets/images/artwork-curated/dukebox-project.jpg',
     access: 'public'
@@ -21,7 +21,7 @@ export const projects: ProjectItem[] = [
     status: 'Prototype',
     summary:
       'A lightweight shared operating workspace for notes, tabs, team coordination, chat, pinned information, and real-time work visibility.',
-    pdf: '/assets/pdfs/clipboard-os3-lite.pdf',
+    pdf: '/assets/pdfs/OS³ ClipboardAi CUTSHEET.pdf',
     video: '/assets/videos/clipboard-preview.mp4',
     image: '/assets/images/artwork-curated/clipboard-ai-private-workspace.jpg',
     access: 'public'
@@ -33,7 +33,7 @@ export const projects: ProjectItem[] = [
     status: 'Product Profile',
     summary:
       'An intelligent voice and communication layer designed to connect conversations, business workflows, routing, support, and AI-assisted response systems.',
-    pdf: '/assets/pdfs/jb3-voicegrid-os3.pdf',
+    pdf: '/assets/pdfs/OS³ VoiceGridAi Telephone CUTSHEET.pdf',
     video: '/assets/videos/voicegrid-preview.mp4',
     image: '/assets/images/artwork-curated/voicegrid-project.png',
     access: 'public'
@@ -45,7 +45,7 @@ export const projects: ProjectItem[] = [
     status: 'Demo',
     summary:
       'The managed AI operating layer for business, designed to bring workflows, intelligence, dashboards, human oversight, and modular AI tools into one structured command environment.',
-    pdf: '/assets/pdfs/os3-dash-product-profile.pdf',
+    pdf: '/assets/pdfs/JB³ OS³ Dash The Operating System.pdf',
     video: '/assets/videos/os3-dash-preview.mp4',
     image: '/assets/images/artwork-curated/os3-dash-command-dashboard.jpg',
     access: 'public'
@@ -57,7 +57,7 @@ export const projects: ProjectItem[] = [
     status: 'Concept',
     summary:
       'A visual command layer for organising projects, assets, evidence, dashboards, media, and operational views inside a structured grid interface.',
-    pdf: '/assets/pdfs/jb3-viewgrid-product-profile.pdf',
+    pdf: '/assets/pdfs/Global Satellite Overlay The Sentinel Eye-compressed.pdf',
     video: '/assets/videos/viewgrid-preview.mp4',
     image: '/assets/images/artwork-curated/viewgrid-project.jpg',
     access: 'public'
