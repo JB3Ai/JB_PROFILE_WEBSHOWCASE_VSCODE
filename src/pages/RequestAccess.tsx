@@ -5,7 +5,7 @@ import { assetRegistry } from '../data/assetRegistry'
 import { buildMailtoUrl, CONTACT_EMAIL } from '../data/contactConfig'
 import { pageMetadata } from '../data/siteMetadata'
 import { usePageMetadata } from '../hooks/usePageMetadata'
-import { submitFounderLead } from '../lib/jb3aiEngine'
+import { submitJonoBlackburnLead } from '../lib/jb3aiEngine'
 
 const accessAudience = [
   'Collaborators exploring a project, platform, or operating system review.',
@@ -65,25 +65,6 @@ export default function RequestAccess() {
     [form, requestTrack]
   )
 
-  const inquiryType = useMemo(() => {
-    if (form.inquiryType) {
-      return form.inquiryType
-    }
-
-    const nextStep = form.nextStep.toLowerCase()
-    const reason = form.reason.toLowerCase()
-
-    if (requestTrack.includes('investor') || nextStep.includes('investor') || reason.includes('investor')) {
-      return 'investor_access' as const
-    }
-
-    if (requestTrack.includes('consult') || nextStep.includes('conversation') || reason.includes('consult')) {
-      return 'consulting_enquiry' as const
-    }
-
-    return 'general_lead' as const
-  }, [form.nextStep, form.reason, requestTrack])
-
   function updateField<K extends keyof typeof form>(field: K, value: (typeof form)[K]) {
     setForm((current) => ({ ...current, [field]: value }))
   }
@@ -104,13 +85,12 @@ export default function RequestAccess() {
     setSubmissionState('idle')
     setSubmissionMessage('')
 
-    const wasDelivered = await submitFounderLead({
-      first_name: firstName,
-      last_name: lastName || undefined,
+    const wasDelivered = await submitJonoBlackburnLead({
+      firstName,
+      lastName: lastName || undefined,
       email: form.email.trim(),
       phone: form.phone.trim() || undefined,
-      inquiry_type: inquiryType,
-      opt_in: true
+      inquiryType: form.inquiryType
     })
 
     setSubmitting(false)
