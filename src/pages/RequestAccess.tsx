@@ -5,6 +5,7 @@ import { assetRegistry } from '../data/assetRegistry'
 import { buildMailtoUrl, CONTACT_EMAIL } from '../data/contactConfig'
 import { pageMetadata } from '../data/siteMetadata'
 import { usePageMetadata } from '../hooks/usePageMetadata'
+import { submitFounderLead } from '../lib/jb3aiEngine'
 
 const accessAudience = [
   'Collaborators exploring a project, platform, or operating system review.',
@@ -20,18 +21,29 @@ const nextStepOptions = [
   'Media or speaking enquiry'
 ] as const
 
+const inquiryTypeOptions = [
+  { value: 'investor_access', label: 'Investor Access' },
+  { value: 'consulting_enquiry', label: 'Consulting Enquiry' },
+  { value: 'general_lead', label: 'General Inquiry' }
+] as const
+
 export default function RequestAccess() {
   usePageMetadata(pageMetadata.requestAccess)
   const nav = useNavigate()
   const [searchParams] = useSearchParams()
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submissionState, setSubmissionState] = useState<'idle' | 'success' | 'error'>('idle')
+  const [submissionMessage, setSubmissionMessage] = useState('')
 
   const [form, setForm] = useState(() => ({
     name: '',
     email: '',
+    phone: '',
     organisation: '',
     reason: searchParams.get('reason') ?? '',
-    nextStep: searchParams.get('next') ?? nextStepOptions[0]
+    nextStep: searchParams.get('next') ?? nextStepOptions[0],
+    inquiryType: 'consulting_enquiry' as (typeof inquiryTypeOptions)[number]['value']
   }))
 
   const requestTrack = searchParams.get('track') ?? 'general-access'
@@ -53,14 +65,65 @@ export default function RequestAccess() {
     [form, requestTrack]
   )
 
+  const inquiryType = useMemo(() => {
+    if (form.inquiryType) {
+      return form.inquiryType
+    }
+
+    const nextStep = form.nextStep.toLowerCase()
+    const reason = form.reason.toLowerCase()
+
+    if (requestTrack.includes('investor') || nextStep.includes('investor') || reason.includes('investor')) {
+      return 'investor_access' as const
+    }
+
+    if (requestTrack.includes('consult') || nextStep.includes('conversation') || reason.includes('consult')) {
+      return 'consulting_enquiry' as const
+    }
+
+    return 'general_lead' as const
+  }, [form.nextStep, form.reason, requestTrack])
+
   function updateField<K extends keyof typeof form>(field: K, value: (typeof form)[K]) {
     setForm((current) => ({ ...current, [field]: value }))
   }
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault()
-    setSubmitted(true)
-    window.location.href = mailtoHref
+
+    if (!form.name.trim() || !form.email.trim()) {
+      setSubmissionState('error')
+      setSubmissionMessage('Please add your name and email before submitting this request.')
+      return
+    }
+
+    const [firstName, ...restOfName] = form.name.trim().split(/\s+/)
+    const lastName = restOfName.join(' ')
+
+    setSubmitting(true)
+    setSubmissionState('idle')
+    setSubmissionMessage('')
+
+    const wasDelivered = await submitFounderLead({
+      first_name: firstName,
+      last_name: lastName || undefined,
+      email: form.email.trim(),
+      phone: form.phone.trim() || undefined,
+      inquiry_type: inquiryType,
+      opt_in: true
+    })
+
+    setSubmitting(false)
+
+    if (wasDelivered) {
+      setSubmitted(true)
+      setSubmissionState('success')
+      setSubmissionMessage('Request submitted to the founder intake engine. A follow-up can now be reviewed manually.')
+      return
+    }
+
+    setSubmissionState('error')
+    setSubmissionMessage('The direct submission failed. Use the email fallback below to send the request manually.')
   }
 
   return (
@@ -122,7 +185,34 @@ export default function RequestAccess() {
                     placeholder="name@example.com"
                   />
                 </label>
+
+                <label className="conversion-field">
+                  <span className="conversion-label">Phone</span>
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(event) => updateField('phone', event.target.value)}
+                    className="input-shell"
+                    autoComplete="tel"
+                    placeholder="Optional phone number"
+                  />
+                </label>
               </div>
+
+              <label className="conversion-field">
+                <span className="conversion-label">Inquiry type</span>
+                <select
+                  value={form.inquiryType}
+                  onChange={(event) => updateField('inquiryType', event.target.value as typeof form.inquiryType)}
+                  className="input-shell conversion-select"
+                >
+                  {inquiryTypeOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
 
               <label className="conversion-field">
                 <span className="conversion-label">Organisation / context</span>
@@ -163,13 +253,13 @@ export default function RequestAccess() {
               </label>
 
               <div className="conversion-note">
-                This preview build does not create accounts or expose private files. Submitting opens your local
-                email client so the request can be reviewed manually.
+                This preview build does not create accounts or expose private files. Submitting posts the request to
+                the founder intake engine, with email fallback still available if needed.
               </div>
 
               <div className="conversion-actions">
-                <PremiumButton type="submit" variant="accent" size="lg">
-                  Open Email Request
+                <PremiumButton type="submit" variant="accent" size="lg" disabled={submitting}>
+                  {submitting ? 'Sending Request...' : 'Send Access Request'}
                 </PremiumButton>
                 <PremiumButton type="button" variant="secondary" size="lg" onClick={() => nav('/login')}>
                   Preview Private OS
@@ -185,8 +275,13 @@ export default function RequestAccess() {
 
               {submitted ? (
                 <p className="conversion-status" role="status" aria-live="polite">
-                  Email draft opened. Access requests are reviewed manually and private materials stay withheld
-                  until a trusted follow-up path is confirmed.
+                  {submissionMessage || 'Request submitted. Access requests are reviewed manually and private materials stay withheld until a trusted follow-up path is confirmed.'}
+                </p>
+              ) : null}
+
+              {submissionState === 'error' && !submitted ? (
+                <p className="conversion-status" role="alert" aria-live="assertive">
+                  {submissionMessage}
                 </p>
               ) : null}
             </form>
