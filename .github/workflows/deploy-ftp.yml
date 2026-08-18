@@ -1,6 +1,9 @@
 name: Deploy public site via FTP
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -25,17 +28,25 @@ jobs:
 
       - name: Validate deploy inputs
         run: |
+          if [ -z "${{ secrets.FTP_SERVER }}" ]; then
+            echo "::error::Missing required secret FTP_SERVER. Add it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          if [ -z "${{ secrets.FTP_USERNAME }}" ]; then
+            echo "::error::Missing required secret FTP_USERNAME. Add it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
           if [ -z "${{ secrets.FTP_PASSWORD }}" ]; then
             echo "::error::Missing required secret FTP_PASSWORD. Add it in Settings > Secrets and variables > Actions."
             exit 1
           fi
-          echo "Deploy target: ftp.jonoblackburn.com -> /public_html/"
+          echo "Deploy target configured for cPanel FTP"
 
       - name: Deploy dist contents via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp.jonoblackburn.com
-          username: jonoblac
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: /public_html/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}
