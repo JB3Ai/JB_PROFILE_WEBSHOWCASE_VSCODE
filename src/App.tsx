@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
+import Projects from './pages/Projects';
 import OS from './pages/OS';
 import Wishlist from './pages/Wishlist';
 
@@ -7,6 +8,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/projects" element={<Projects />} />
       <Route path="/os" element={<OS />} />
       <Route path="/wishlist" element={<Wishlist />} />
       {/* Legacy and duplicate paths resolve to canonical homepage anchors */}
