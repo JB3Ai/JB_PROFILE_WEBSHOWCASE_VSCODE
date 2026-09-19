@@ -50,3 +50,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}
+          # founder-placeholder.svg is a stale file left over on the server from an
+          # earlier deploy that cPanel refuses to delete (550 Permission denied),
+          # which otherwise aborts the whole sync. Leave it in place rather than
+          # retrying the delete.
+          exclude: |
+            **/founder-placeholder.svg
