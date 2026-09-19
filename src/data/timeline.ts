@@ -1,0 +1,68 @@
+import type { TimelineEvent } from '@/types';
+
+export const timelineEvents: TimelineEvent[] = [
+  {
+    id: 'early-technical-foundation',
+    year: '2004–2010',
+    title: 'Early Technical Foundation',
+    category: 'foundation',
+    description: 'Built electronics, AV, automation, and embedded systems while learning that reliable output begins with clean signal, careful integration, and control that holds under pressure.',
+    tags: ['electronics', 'automation', 'systems'],
+  },
+  {
+    id: 'elite-technologies',
+    year: '2011–2014',
+    title: 'Elite Technologies',
+    category: 'enterprise',
+    description: 'Built Elite Technologies around practical automation, control systems, and delivery that had to work outside the pitch deck.',
+    tags: ['enterprise', 'automation', 'proof'],
+  },
+  {
+    id: 'trust-in-hope',
+    year: '2015–2017',
+    title: 'Trust in Hope',
+    category: 'recovery',
+    description: 'Trust in Hope turned recovery into structure: accountability, routine, logistics, and practical care designed to support real people, not abstractions.',
+    tags: ['recovery', 'trust', 'support'],
+  },
+  {
+    id: 'imed-medical-group',
+    year: '2018–2020',
+    title: 'iMED Medical Group',
+    category: 'healthcare',
+    description: 'iMED marked a historical diagnostics chapter, building laboratory, toxicology, and medical-systems capability where precision and evidence had to stand up.',
+    tags: ['healthcare', 'medical', 'coordination'],
+  },
+  {
+    id: 'covid-response',
+    year: '2020–2021',
+    title: 'COVID Response',
+    category: 'crisis',
+    description: 'Led COVID-response initiatives shaped by rapid deployment, facility support, diagnostics coordination, and operational resilience under sustained pressure.',
+    tags: ['COVID', 'crisis', 'response'],
+  },
+  {
+    id: 'dna-and-forensic-expansion',
+    year: '2021–2023',
+    title: 'DNA and Forensic Expansion',
+    category: 'forensics',
+    description: 'Expanded into DNA and forensic capability to strengthen evidence chains, compliance, and systems that could be trusted when accuracy mattered most.',
+    tags: ['forensics', 'DNA', 'evidence'],
+  },
+  {
+    id: 'jb3ai-and-os3-systems',
+    year: '2024–Present',
+    title: 'JB³Ai and OS³ Systems',
+    category: 'ai',
+    description: 'Built JB³Ai and OS³ to apply lessons from automation, recovery, and diagnostics into AI systems designed to serve real life and absorb complexity with structure.',
+    tags: ['AI', 'platform', 'systems'],
+  },
+  {
+    id: 'gtr3-coming-soon',
+    year: 'Coming Soon',
+    title: 'GTR³ - The Third Rise',
+    category: 'future',
+    description: 'Preparing GTR³ as the symbolic third-rise layer: fatherhood, rebuilding, discipline, and the wiser return still being written.',
+    tags: ['GTR3', 'future', 'teaser'],
+  },
+];

@@ -1,92 +1,94 @@
-# Jonathan Blackburn OS
+JB³ OS: Master Deployment & Optimization Record
+Date: August 1, 2026 Deployment: jonoblackburn.com (React/Tailwind/Framer Motion SPA)
+I. Infrastructure & Server Optimization
+•	Canonical Routing: Enforced strict apex-to-www and HTTP-to-HTTPS redirects via .htaccess to prevent duplicate indexing between the custom domain and the Vercel staging URL.
+•	Asset Compression: Enabled Gzip/Deflate server-side compression for HTML, CSS, and JavaScript, reducing the initial uncompressed JS bundle load by over 500 KB.
+•	Aggressive Caching: Implemented long-term cache headers (6–12 months) for immutable hashed build assets and compressed media formats.
+•	Legacy URL Remediation: Established 301 redirects to permanently route outdated mobile paths (e.g., /current-projects-mobile/) to their canonical desktop equivalents.
+II. SEO & AI Search Visibility
+•	Dynamic Metadata: Injected route-specific, keyword-optimized Title Tags and Meta Descriptions for the Homepage, Founder (/about), and Ecosystem (/current-projects) pages.
+•	Structured Data (JSON-LD): Deployed Person and Organization Schema markup in the document head to instantly establish entity authority and context for AI search engines (ChatGPT, Google AI).
+•	Sitemap Coverage: Verified sitemap.xml and robots.txt resolution, ensuring standalone routes like /contact and /wishlist were properly indexed for crawlers.
+III. Mobile Performance & UI/UX
+•	Render Freeze Resolution: Eliminated a critical 60-second mobile rendering bottleneck by disabling heavy GPU backdrop-blur effects on viewports under 768px and replacing them with high-opacity solid backgrounds.
+•	Framer Motion Optimization: Adjusted whileInView viewport triggers (margin adjustments and once: true) to prevent layout collapse and ensure instant content reveals on mobile scrolling.
+•	Contrast Calibration: Permanently resolved light/dark mode contrast bugs on footer-level bio typography to ensure perfect readability.
+IV. Brand Posture & Copywriting
+•	"Executive Atelier" Tone: Conducted a global copy sweep to remove defensive phrasing (e.g., "Not desperation") and casual naming conventions, elevating the brand posture to a highly authoritative, clinical standard (e.g., "Strategic Availability. Focused Impact.").
+•	Wishlist Redesign: Rebuilt the sponsorship page into a glassmorphic "Strategic Infrastructure & Sponsorships" portal with dynamic Framer Motion filtering, while preserving frictionless, recognizable payment gateway titles.
+•	Typographic Discipline: Purged all em-dashes across the site and codebase, replacing them with strict colons, commas, or standard formatting to maintain the high-end aesthetic.
 
-Jonathan Blackburn OS is a premium public founder platform with a companion `/os` interface for structured profile, project, evidence, media, and investor-preview presentation.
 
-## Current Status
+# React + TypeScript + Vite
 
-- Deployment preparation complete through Milestone 15
-- Content remains placeholder-safe by design
-- No backend, CMS, real auth, live media, or sensitive document delivery in v1
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Purpose
+Currently, two official plugins are available:
 
-This project presents:
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- founder profile and positioning
-- project showcase and preview media
-- evidence and proof layers
-- investor overview and controlled-access placeholders
-- a cinematic public experience with a branded OS layer
+## React Compiler
 
-## Tech Stack
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-- React 18
-- TypeScript
-- Vite 5
-- Tailwind CSS
-- Framer Motion
-- React Router
+## Expanding the ESLint configuration
 
-## Routes
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-- `/` public homepage
-- `/login` placeholder login layer
-- `/request-access` placeholder access request layer
-- `/os` restricted-style OS interface
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## Asset Rules
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-- Keep public assets in `public/assets`
-- Use public paths through `src/data/assetRegistry.ts`
-- Do not import visual/media files from `src`
-- Use placeholder-safe assets until approved real files exist
-- Keep logos in `public/assets/logos`
-- Keep icons in `public/assets/icons`
-- Keep images in `public/assets/images`
-- Keep videos in `public/assets/videos`
-- Keep documents in `public/assets/pdfs`
-
-## Safety Rules
-
-- Do not place private PDFs, real investor packs, or sensitive files in `public/assets`
-- Do not expose real financial, legal, personal, or due-diligence documents
-- Keep placeholder links clearly non-sensitive and non-misleading
-- Avoid copy that implies active iMED services or hidden secure infrastructure
-
-## Milestone Status
-
-- Milestone 10: Visual Polish Pass 1
-- Milestone 11: Architecture Hardening Pass 1
-- Milestone 12: Public Navigation and Scroll Polish
-- Milestone 13: Boot Animation
-- Milestone 14: Asset Integration Pass 1
-- Milestone 15: Deployment Preparation Pass 1
-
-## Local Development
-
-```bash
-npm install
-npm run dev
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-Build for production:
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```bash
-npm run build
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-Preview the build locally if needed:
-
-```bash
-npm run preview
-```
-
-## Deployment Snapshot
-
-- Recommended first target: Vercel
-- Build command: `npm run build`
-- Output directory: `dist`
-- Install command: `npm install`
-- Environment variables: none required for v1
-
-See [DEPLOYMENT.md](./DEPLOYMENT.md) and [LAUNCH_CHECKLIST.md](./LAUNCH_CHECKLIST.md) for deployment and launch checks.
