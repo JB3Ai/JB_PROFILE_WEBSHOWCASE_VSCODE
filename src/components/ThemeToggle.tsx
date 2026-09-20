@@ -12,14 +12,16 @@ const STATES: { key: Theme; label: string; icon: typeof Sun }[] = [
 const STORAGE_KEY = 'jb-theme';
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>('default');
+  const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'day' || saved === 'dark') setTheme(saved);
+      const initialTheme: Theme = saved === 'day' || saved === 'dark' ? saved : 'dark';
+      setTheme(initialTheme);
+      document.documentElement.dataset.theme = initialTheme;
     } catch {
-      /* storage unavailable */
+      document.documentElement.dataset.theme = 'dark';
     }
   }, []);
 
