@@ -1,0 +1,25 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#08121B"/>
+  <rect x="32" y="32" width="1136" height="736" rx="40" stroke="url(#a)" stroke-opacity="0.25" stroke-width="2"/>
+  <circle cx="302" cy="246" r="124" fill="#163142" fill-opacity="0.42"/>
+  <circle cx="370" cy="344" r="132" fill="url(#b)" fill-opacity="0.9"/>
+  <path d="M226 650C257.3 516.919 375.266 420 516 420C656.734 420 774.7 516.919 806 650" fill="#0D1B28"/>
+  <path d="M714 170H950" stroke="#58D6DA" stroke-width="8" stroke-linecap="round"/>
+  <path d="M714 234H1068" stroke="#D7DEE5" stroke-width="4" stroke-linecap="round" opacity="0.92"/>
+  <path d="M714 284H1014" stroke="#94A8BA" stroke-width="4" stroke-linecap="round" opacity="0.82"/>
+  <text x="96" y="106" fill="#F6F7F1" font-family="Manrope, Arial, sans-serif" font-size="30" letter-spacing="6">FOUNDER BRIEF / PUBLIC-SAFE PROFILE</text>
+  <text x="714" y="382" fill="#F6F7F1" font-family="Fraunces, Georgia, serif" font-size="56">Portrait frame only</text>
+  <text x="714" y="444" fill="#D7DEE5" font-family="Manrope, Arial, sans-serif" font-size="28">Used across the OS until approved founder imagery is available</text>
+  <text x="96" y="704" fill="#94A8BA" font-family="Manrope, Arial, sans-serif" font-size="26">JB&#179;Ai identity layer placeholder for Jonathan Blackburn OS</text>
+  <defs>
+    <linearGradient id="a" x1="68" y1="58" x2="1120" y2="748" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#58D6DA"/>
+      <stop offset="0.56" stop-color="#74D3A4"/>
+      <stop offset="1" stop-color="#E9C98F"/>
+    </linearGradient>
+    <linearGradient id="b" x1="238" y1="216" x2="500" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#58D6DA"/>
+      <stop offset="1" stop-color="#74D3A4"/>
+    </linearGradient>
+  </defs>
+</svg>
